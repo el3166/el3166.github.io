@@ -49,6 +49,14 @@
         <h1 class="my-4 text-5xl font-bold leading-tight">
           Which borough would you like to learn more about?
         </h1>
+        <select id ='borough' name="borough" class = 'text-black'>
+          <option value="All">All</option>
+          <option value="Brooklyn">Brookyln</option>
+          <option value="Bronx">Bronx</option>
+          <option value="Manhattatn">Manhattan</option>
+          <option value="Queens">Queens</option>
+          <option value="Staten Island">Staten Island</option>
+        </select> 
         <table border = '3' style = 'width: 100%'>
           <tr>
             <th style = 'width: 15%'>
@@ -83,17 +91,13 @@
             </th>
           </tr>
         </table>
-        
-        
         <div style = 'border:3px solid #3ba048'>
           <p id="showData"></p>
-          <table align="center" id="table" border="1">
-          </table>
         </div>
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-  </script>
 </body>
 </html>
