@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>
-      NYC Bike Racks
-    </title>
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
-    <style>
-      .gradient {
-        background: linear-gradient(90deg, #3ba048 0%, #f5f5f5 100%);
-      }
-    </style>
-  </head>
-  <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
-    <nav id="header" class="fixed w-full z-30 top-0 text-white">
-      <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-        <div class="pl-4 flex items-center">
-          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="index.html">
-            New York City Bike Racks
-          </a>
-        </div>
-        <div class="w-full flex-grow lg:flex lg:items-center mt-2 lg:mt-0 lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content" style = 'text-align: right'>
-          <ul class="list-reset lg:flex justify-end flex-1 items-center">
-            <li class="mr-3">
-              <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="types.html">
-                Types of Bike Racks
-              </a>
-            </li>
-            <li class="mr-3">
-              <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="data.html">
-                Other Data
-              </a>
-            </li>
-          </ul>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    NYC Bike Racks
+  </title>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <style>
+    .gradient {
+      background: linear-gradient(90deg, #3ba048 0%, #f5f5f5 100%);
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+  <nav id="header" class="fixed w-full z-30 top-0 text-white">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      <div class="pl-4 flex items-center">
+        <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+          href="index.html">
+          New York City Bike Racks
+        </a>
       </div>
-    </nav>
-    <div class="pt-20">
-      <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-        <div class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
-          <h1 class="my-4 text-5xl font-bold leading-tight">
-            Which borough would you like to learn more about?
-          </h1>
-          <button onclick = 'getAPIData()'>query</button>
-          <div id = "API-output"></div>
-          <p class="leading-normal text-2xl mb-8">
-            This is the main page for the NYC DOT bike rack data. Explore around to find out more about the different types of bike racks in New York City as well as other information.
-          </p>
+      <div class="w-full flex-grow lg:flex lg:items-center mt-2 lg:mt-0 lg:bg-transparent text-black p-4 lg:p-0 z-20"
+        id="nav-content" style='text-align: right'>
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="mr-3">
+            <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="types.html">
+              Types of Bike Racks
+            </a>
+          </li>
+          <li class="mr-3">
+            <a class="inline-block2 py-2 px-4 text-black font-bold no-underline" href="data.html">
+              Other Data
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="pt-20">
+    <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+      <div class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
+        <h1 class="my-4 text-5xl font-bold leading-tight">
+          Which borough would you like to learn more about?
+        </h1>
+        <table border = '3'>
+          <tr>
+            <th><button onclick="constructTable('#table')">All</button></th>
+            <th><button onclick="constructTable('#table')">Brooklyn</button></th>
+            <th><button onclick="constructTable('#table')">Bronx</button></th>
+            <th><button onclick="constructTable('#table')">Manhattan</button></th>
+            <th><button onclick="constructTable('#table')">Queens</button></th>
+            <th><button onclick="constructTable('#table')">Staten Island</button></th>
+          </tr>
+        </table>
+        <div style = 'border:3px solid #3ba048'>
+          <table align="center" id="table" border="1">
+          </table>
         </div>
       </div>
     </div>
-    <script type = "text/javascript" src="js/main.js"></script>
-  </body>
+  </div>
+  <script type="text/javascript" src="js/main.js"></script>
+  </script>
+</body>
 </html>
