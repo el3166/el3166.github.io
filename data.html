@@ -17,7 +17,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
-<body onload = 'constructTable("#table", "All")'class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+<body onload = 'constructTable("#table")' class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
   <nav id="header" class="fixed w-full z-30 top-0 text-white">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
       <div class="pl-4 flex items-center">
@@ -47,23 +47,14 @@
     <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
       <div class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
         <h1 class="my-4 text-5xl font-bold leading-tight">
-          Which borough would you like to learn more about?
+          <button onclick = 'constructTable("#table")' >Click for bike rack data</button>
         </h1>
-        <select onchange = "constructTable('#table', this.value)" id ='borough' name="borough" class = 'text-black'>
-          <option value="All">All</option>
-          <option value="Brooklyn">Brookyln</option>
-          <option value="Bronx">Bronx</option>
-          <option value="Manhattatn">Manhattan</option>
-          <option value="Queens">Queens</option>
-          <option value="Staten Island">Staten Island</option>
-        </select> 
         <div style = 'border:3px solid #3ba048'>
           <table align = "center" id="table" border="1"></table>
         </div>
       </div>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

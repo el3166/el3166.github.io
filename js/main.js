@@ -1,6 +1,19 @@
 var myData = []
 
-function constructTable(selector, borough) {
+function jsonArrayTo2D(arrayOfObjects){
+  let header = [],
+      AoA = [];
+  arrayOfObjects.forEach(obj => {
+    Object.keys(obj).forEach(key => header.includes(key) || header.push(key))
+    let thisRow = new Array(header.length);
+    header.forEach((col, i) => thisRow[i] = obj[col] || '')
+    AoA.push(thisRow);
+  })
+  AoA.unshift(header);
+  return AoA;
+}
+
+function constructTable(selector) {
   fetch('https://data.cityofnewyork.us/resource/au7q-njtk.json').then((response) => {
     return response.json()
   }).then((data) => {
@@ -31,7 +44,6 @@ function constructTable(selector, borough) {
       row.append($('<td/>').html(val));
     }
 
-    // Adding each row to the table
     $(selector).append(row);
   }
 }
