@@ -48,7 +48,7 @@
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
           <h1 class="my-4 text-5xl font-bold leading-tight">
-            Main landing page!
+            
           </h1>
           <p class="leading-normal text-2xl mb-8">
             This is the main page for the NYC DOT bike rack data. Explore around to find out more about the different types of bike racks in New York City as well as other information.
@@ -70,7 +70,6 @@
         scrollpos = window.scrollY;
 
         if (scrollpos > 10) {
-          header.classList.add("bg-white");
           navaction.classList.remove("bg-white");
           navaction.classList.add("gradient");
           navaction.classList.remove("text-gray-800");
@@ -100,40 +99,6 @@
           navcontent.classList.add("bg-gray-100");
         }
       });
-    </script>
-    <script>
-      var navMenuDiv = document.getElementById("nav-content");
-      var navMenu = document.getElementById("nav-toggle");
-
-      document.onclick = check;
-      function check(e) {
-        var target = (e && e.target) || (event && event.srcElement);
-
-        //Nav Menu
-        if (!checkParent(target, navMenuDiv)) {
-          // click NOT on the menu
-          if (checkParent(target, navMenu)) {
-            // click on the link
-            if (navMenuDiv.classList.contains("hidden")) {
-              navMenuDiv.classList.remove("hidden");
-            } else {
-              navMenuDiv.classList.add("hidden");
-            }
-          } else {
-            // click both outside link and outside menu, hide menu
-            navMenuDiv.classList.add("hidden");
-          }
-        }
-      }
-      function checkParent(t, elm) {
-        while (t.parentNode) {
-          if (t == elm) {
-            return true;
-          }
-          t = t.parentNode;
-        }
-        return false;
-      }
     </script>
   </body>
 </html>
