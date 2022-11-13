@@ -1,6 +1,6 @@
 var myData = []
 
-function constructTable(selector) {
+function constructTable(selector, borough) {
   fetch('https://data.cityofnewyork.us/resource/au7q-njtk.json').then((response) => {
     return response.json()
   }).then((data) => {
@@ -11,7 +11,7 @@ function constructTable(selector) {
 
   let displayColumns = ['objectid', 'boro_name', 'ifoaddress', 'assetsubty', 'date_inst']
 
-  myData = myData.map(x => {
+  list = myData.map(x => {
     let newObj = {};
     for (col of displayColumns) {
       newObj[col] = x[col];
@@ -19,36 +19,43 @@ function constructTable(selector) {
     return newObj;
   });
 
-  // values for headers
-  var col = [];
-  for (var i = 0; i < myData.length; i++) {
-    for (var key in myData[i]) {
-      if (col.indexOf(key) === -1) {
-        col.push(key);
+  var cols = Headers(list, selector);
+
+  for (var i = 0; i < list.length; i++) {
+    var row = $('<tr/>');
+    for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+      var val = list[i][cols[colIndex]];
+
+      if (val == null) val = "";
+
+      row.append($('<td/>').html(val));
+    }
+
+    // Adding each row to the table
+    $(selector).append(row);
+  }
+}
+
+function Headers(list, selector) {
+  var columns = [];
+  var header = $('<tr/>');
+
+  for (var i = 0; i < list.length; i++) {
+    var row = list[i];
+
+    for (var k in row) {
+      if ($.inArray(k, columns) == -1) {
+        columns.push(k);
+
+        // Creating the header
+        header.append($('<th/>').html(k));
       }
     }
   }
-  // the table
-  var table = document.createElement("table");
-  // create headers
-  var tr = table.insertRow(-1); // TABLE ROW.
-  for (var i = 0; i < col.length; i++) {
-    var th = document.createElement("th"); // TABLE HEADER.
-    th.innerHTML = col[i];
-    tr.appendChild(th);
-  }
-  // add rows
-  for (var i = 0; i < myData.length; i++) {
-    tr = table.insertRow(-1);
-    for (var j = 0; j < col.length; j++) {
-      var tabCell = tr.insertCell(-1);
-      tabCell.innerHTML = myData[i][col[j]];
-    }
-  }
-  // Output
-  var divContainer = document.getElementById("showData");
-  divContainer.innerHTML = "";
-  divContainer.appendChild(table);
+
+  // Appending the header to the table
+  $(selector).append(header);
+  return columns;
 }
 
 var scrollpos = window.scrollY;
@@ -66,7 +73,7 @@ document.addEventListener("scroll", function () {
       navcontent1[i].classList.remove("text-black");
       navcontent2[i].classList.add("opacity-0");
       navcontent2[i].classList.remove("text-black")
-    }  
+    }
   } else {
     header.classList.remove("bg-white");
     for (var i = 0; i < toToggle.length; i++) {
