@@ -1,18 +1,14 @@
-fetch('https://data.cityofnewyork.us/resource/au7q-njtk.json')
-
-
-function getAPIData(url) {
+function getAPIData() {
+  response = fetch('https://data.cityofnewyork.us/resource/au7q-njtk.json')
+  console.log(response)
   return url
 }
-
-//
 
 var scrollpos = window.scrollY;
 var header = document.getElementById("header");
 var toToggle = document.querySelectorAll(".toggleColour");
 document.addEventListener("scroll", function () {
   scrollpos = window.scrollY;
-
   if (scrollpos > 10) {
     for (var i = 0; i < toToggle.length; i++) {
       toToggle[i].classList.add("opacity-0");
