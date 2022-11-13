@@ -11,13 +11,13 @@
   <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
   <style>
     .gradient {
-      background: linear-gradient(90deg, #3ba048 0%, #f5f5f5 100%);
+      background: linear-gradient(90deg, #3ba048 0%, #cccccc 100%);
     }
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
-<body onload = 'constructTable("#table")' class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+<body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
   <nav id="header" class="fixed w-full z-30 top-0 text-white">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
       <div class="pl-4 flex items-center">
@@ -45,16 +45,28 @@
   </nav>
   <div class="pt-20">
     <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-      <div class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
+      <div class="flex flex-col w-full md:w-4/5 justify-center items-start text-center md:text-left">
         <h1 class="my-4 text-5xl font-bold leading-tight">
-          <button onclick = 'constructTable("#table")' >Click for bike rack data</button>
+          More NYC Bike Rack Information
+          <button onclick = 'constructTable()' >Click for all bike rack data</button>
         </h1>
+        <div>
+          <select id="borough" name="borough" class = 'text-black'>
+            <option value="All">All</option>
+            <option value="Brooklyn">Brooklyn</option>
+            <option value="Bronx">Bronx</option>
+            <option value="Manhattan">Manhattan</option>
+            <option value="Queens">Queens</option>
+            <option value="Staten Island">Staten Island</option>
+         </select> 
+        </div>
         <div style = 'border:3px solid #3ba048'>
-          <table align = "center" id="table" border="1"></table>
+          <p id="showData"></p>
         </div>
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

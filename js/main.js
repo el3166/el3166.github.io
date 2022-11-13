@@ -1,18 +1,5 @@
 var myData = []
 
-function jsonArrayTo2D(arrayOfObjects){
-  let header = [],
-      AoA = [];
-  arrayOfObjects.forEach(obj => {
-    Object.keys(obj).forEach(key => header.includes(key) || header.push(key))
-    let thisRow = new Array(header.length);
-    header.forEach((col, i) => thisRow[i] = obj[col] || '')
-    AoA.push(thisRow);
-  })
-  AoA.unshift(header);
-  return AoA;
-}
-
 function constructTable(selector) {
   fetch('https://data.cityofnewyork.us/resource/au7q-njtk.json').then((response) => {
     return response.json()
@@ -22,9 +9,9 @@ function constructTable(selector) {
     })
   })
 
-  let displayColumns = ['objectid', 'boro_name', 'ifoaddress', 'assetsubty', 'date_inst']
+  let displayColumns = ['objectid', 'ifoaddress', 'assetsubty', 'date_inst', 'boro_name']
 
-  list = myData.map(x => {
+  myData = myData.map(x => {
     let newObj = {};
     for (col of displayColumns) {
       newObj[col] = x[col];
@@ -32,43 +19,57 @@ function constructTable(selector) {
     return newObj;
   });
 
-  var cols = Headers(list, selector);
-
-  for (var i = 0; i < list.length; i++) {
-    var row = $('<tr/>');
-    for (var colIndex = 0; colIndex < cols.length; colIndex++) {
-      var val = list[i][cols[colIndex]];
-
-      if (val == null) val = "";
-
-      row.append($('<td/>').html(val));
-    }
-
-    $(selector).append(row);
-  }
-}
-
-function Headers(list, selector) {
-  var columns = [];
-  var header = $('<tr/>');
-
-  for (var i = 0; i < list.length; i++) {
-    var row = list[i];
-
-    for (var k in row) {
-      if ($.inArray(k, columns) == -1) {
-        columns.push(k);
-
-        // Creating the header
-        header.append($('<th/>').html(k));
+  var col = [];
+    for (var i = 0; i < myData.length; i++) {
+      for (var key in myData[i]) {
+        if (col.indexOf(key) === -1) {
+          col.push(key);
+        }
       }
     }
-  }
 
-  // Appending the header to the table
-  $(selector).append(header);
-  return columns;
+    var table = document.createElement("table");
+
+    var tr = table.insertRow(-1); 
+    for (var i = 0; i < col.length; i++) {
+      var th = document.createElement("th"); 
+      th.innerHTML = col[i];
+      tr.appendChild(th);
+    }
+
+    for (var i = 0; i < myData.length; i++) {
+      tr = table.insertRow(-1);
+      for (var j = 0; j < col.length; j++) {
+        var tabCell = tr.insertCell(-1);
+        tabCell.innerHTML = myData[i][col[j]];
+        tr.appendChild(tabCell);
+      }
+      tr.setAttribute('class', tabCell.innerHTML)
+    }
+
+    var divContainer = document.getElementById("showData");
+    divContainer.innerHTML = "";
+    divContainer.appendChild(table);
 }
+
+$(document).ready(function(){
+  $("#borough").on('click', function(){
+    var b = $(this).val();
+    $("table tr").each(function(index){
+      var val = $(":nth-child(5)", this).html();
+      if(b === 'All') {
+        $(this).show();
+      } else if(val == b) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  })
+;
+
+  $("#borough").trigger('click');
+});
 
 var scrollpos = window.scrollY;
 var header = document.getElementById("header");
